@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Home</title>
+  <link rel="stylesheet" href="{% static  'styles/style.css' %}" />
+  <link rel="stylesheet" href="{% static 'styles/formStyle.css' %}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+</head>
+
+<body>
+
+  <header>
+    <h1>Welcome to Bix Tech</h1>
+    <p>Innovating for a better future</p>
+
+    <div class="bars">
+      <nav>
+        <a href="{% url 'home-page' %}">Home</a>|
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'dashboard-page' user.id %}">Dashboard</a>|
+        {% endif %}
+        <a href="#activities">Activities</a>|
+        <a href="{% url 'registerPage' %}">Internship</a>|
+        <a href="{% url 'registerPage' %}">Learning</a>|
+        <a href="{% url 'service-page' %}">Services</a>|
+        <a href="{% url 'registerPage' %}">Register</a>|
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'logout' %}" onclick="redirectSignup()">Logout</a>|
+        {% else%}
+        <a href="{% url 'loginPage' %}" onclick="redirectSignup()">Login</a>|
+        {% endif %}
+        {% if request.user.is_superuser %}
+        <a href="{% url 'control-panel' user.id %}">AdminPanel</a>
+        {% endif%}
+      </nav>
+    </div>
+
+  </header>
+  <div class="container">
+
+    {% block content %}
+    {% endblock %}
+
+  </div>
+  <h2 style="color: brown;">welcome {{ user.username }}</h2>
+  <footer class="footer-social">
+    <p>&copy; 2026 Bix Tech. All rights reserved.</p>
+
+    <!-- contact information -->
+    <div class="footer-social">
+
+      <a href="https://www.facebook.com" target="_blank" class="social-icon facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://www.youtube.com" target="_blank" class="social-icon youtube">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://x.com" target="_blank" class="social-icon x">
+        <i class="fab fa-twitter"></i> <!-- X still uses Twitter icon in FA -->
+      </a>
+      <a href="https://www.threads.net" target="_blank" class="social-icon threads">
+        <i class="fab fa-instagram"></i> <!-- Threads often styled via Instagram icon -->
+      </a>
+
+      <a href="bixtech3@gmail.com" class="social-icon email">
+        <i class="fas fa-envelope"></i>
+      </a>
+    </div>
+    <P>official email: bixtech3@gmail.com</P>
+
+  </footer>
+
+  <script>
+    function redirectSignup() {
+      window.location.href = "/signup";
+    }
+  </script>
+
+</body>
+
+</html>

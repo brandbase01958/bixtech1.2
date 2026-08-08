@@ -1,0 +1,236 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Bixtech Admin Panel</title>
+  <link rel="stylesheet" href="{% static 'styles/admin_panel.css' %}">
+<link rel="stylesheet" href="{% static 'styles/dashboardstyles.css' %}">
+  <script src="{% static 'js/admin_panel.js' %}" defer></script>
+</head>
+<body>
+<div class="dash-shell">
+  <aside id="admin-shell" class="dash-side">
+    <a href="/" class="brand">Home</a>
+    <nav class="dash-nav">
+      <a href="#applicants">Applicants</a>
+      <a href="#interns">Interns</a>
+      <a href="#news">News</a>
+      <a href="#bixenv">Bixenv</a>
+      <a href="#activities">Activities</a>
+      <a href="#tasks">Tasks</a>
+      <a href="#messages">Messages</a>
+      <a href="#announcements">Announcements</a>
+    </nav>
+      <div class="dash-side-foot">
+      <span class="avatar">    {% if profile.avatar %}
+      <img src="{{ profile.avatar.url }}" alt="Avatar" style="width:100px;height:100px;border-radius:50%;">
+    {% endif %}</span>
+      <!-- <span class="avatar">AN</span> -->
+      <div>
+        <strong>Admin — {{ user.username }}</strong>
+        <span>Studio lead</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="dash-main">
+    <h1>Admin Dashboard</h1>
+
+    <!-- News -->
+    <section id="news" class="panel">
+      <h3>Add News ({{ news|length }})</h3>
+            <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="add_news">
+        {{ news_form.as_p }}
+        <button class="btn">Add News</button>
+      </form>
+<ul>
+  {% for item in news %}
+    <li>
+      {{ item.name }} — {{ item.Descriptions }}
+
+      <form method="post" style="display:inline;">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="update_news">
+        <input type="hidden" name="news_id" value="{{ item.id }}">
+        <button type="submit" class="btn btn-update">Update</button>
+      </form>
+      <!-- Delete -->
+      <form method="post" style="display:inline;" onsubmit="return confirm('Delete this news?');">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="delete_news">
+        <input type="hidden" name="news_id" value="{{ item.id }}">
+        <button type="submit" class="btn btn-delete">Delete</button>
+      </form>
+    </li>
+  {% endfor %}
+</ul>
+</section>
+
+    <!-- Announcement -->
+    <section id="announcements" class="panel">
+      <h3>Announcements ({{ announcements|length }})</h3>
+         <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="add_announcement">
+        {{ announcement_form.as_p }}
+        <button class="btn">Post Announcement</button>
+      </form><br>
+{% for ann in announcements %}
+  <div class="panel" id="anonce">
+    <strong>{{ ann.title }}</strong> — {{ ann.body }}
+    <form method="post" style="display:inline;">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="update_announcement">
+      <input type="hidden" name="announcement_id" value="{{ ann.id }}">
+      <button type="submit" class="btn btn-update">Update</button>
+    </form>
+    <form method="post" style="display:inline;" onsubmit="return confirm('Delete this announcement?');">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="delete_announcement">
+      <input type="hidden" name="announcement_id" value="{{ ann.id }}">
+      <button type="submit" class="btn btn-delete">Delete</button>
+    </form>
+  </div>
+{% endfor %}
+  {% for ann in announcements %}<div class="panel" id="anonce"><strong>{{ ann.title }}</strong> — {{ ann.body }}</div>{% endfor %}
+    </section>
+
+    <!-- Bixenv -->
+    <section id="bixenv" class="panel">
+      <h3>Bixenv ({{ bixenv|length }})</h3>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="add_bixenv">
+        {{ bixenv_form.as_p }}
+        <button class="btn">Add Bixenv</button>
+      </form>
+  <!-- existing add form -->
+  <ul>
+    {% for env in bixenv %}
+      <li>
+        {{ env.name }}
+        <form method="post" style="display:inline;">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="update_bixenv">
+          <input type="hidden" name="bixenv_id" value="{{ env.id }}">
+          <button type="submit" class="btn btn-update">Update</button>
+        </form>
+        <form method="post" style="display:inline;" onsubmit="return confirm('Delete this bixenv?');">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="delete_bixenv">
+          <input type="hidden" name="bixenv_id" value="{{ env.id }}">
+          <button type="submit" class="btn btn-delete">Delete</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+
+
+    <!-- Activities -->
+ <section id="activities" class="panel">
+  <h3>Activities ({{ activities|length }})</h3>
+        <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="add_activity">
+        {{ activity_form.as_p }}
+        <button class="btn">Add Activity</button>
+      </form>
+  <!-- existing add form -->
+  <ul>
+    {% for act in activities %}
+      <li>
+        {{ act.type }} — {{ act.start_date }}
+        <form method="post" style="display:inline;">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="update_activity">
+          <input type="hidden" name="activity_id" value="{{ act.id }}">
+          <button type="submit" class="btn btn-update">Update</button>
+        </form>
+        <form method="post" style="display:inline;" onsubmit="return confirm('Delete this activity?');">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="delete_activity">
+          <input type="hidden" name="activity_id" value="{{ act.id }}">
+          <button type="submit" class="btn btn-delete">Delete</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+
+
+<!-- add_intern -->
+ <section id="interns" class="panel">
+  <h3>Add Intern ({{ interns|length }})</h3>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="add_intern">
+    {{ intern_form.as_p }}
+    <button class="btn">Add Intern</button>
+  </form>
+
+  <ul>
+    {% for intern in interns %}
+      <li>
+        {{ intern.user.name }} — {{ intern.department }}
+        <form method="post" style="display:inline;">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="update_intern">
+          <input type="hidden" name="intern_id" value="{{ intern.id }}">
+          <button type="submit" class="btn btn-update">Update</button>
+        </form>
+        <form method="post" style="display:inline;" onsubmit="return confirm('Delete this intern?');">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="delete_intern">
+          <input type="hidden" name="intern_id" value="{{ intern.id }}">
+          <button type="submit" class="btn btn-delete">Delete</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+
+
+    <!-- Tasks -->
+<section id="tasks" class="panel">
+  <h3>Tasks ({{ tasks|length }})</h3>
+        <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="add_task">
+        <label for="intern_id">Assign to Intern:</label>
+        <select name="intern_id" id="intern_id">
+          {% for intern in interns %}
+            <option value="{{ intern.id }}">{{ intern.user.name }}</option>
+          {% endfor %}
+        </select>
+        {{ task_form.as_p }}
+        <button class="btn">Assign Task</button>
+      </form>
+  <!-- existing add form -->
+  <ul>
+    {% for task in tasks %}
+      <li>
+        {{ task.title }} — {{ task.status }}
+        <form method="post" style="display:inline;">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="update_task">
+          <input type="hidden" name="task_id" value="{{ task.id }}">
+          <button type="submit" class="btn btn-update">Update</button>
+        </form>
+        <form method="post" style="display:inline;" onsubmit="return confirm('Delete this task?');">
+          {% csrf_token %}
+          <input type="hidden" name="action" value="delete_task">
+          <input type="hidden" name="task_id" value="{{ task.id }}">
+          <button type="submit" class="btn btn-delete">Delete</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+ </section>
+  </main>
+</div>
+</body>
+</html>

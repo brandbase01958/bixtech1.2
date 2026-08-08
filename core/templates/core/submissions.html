@@ -1,0 +1,36 @@
+{% extends 'core/home.html' %}
+{% load static %}
+
+{% block content %}
+<head>
+  <title>Submissions — Bixtech</title>
+  <link rel="stylesheet" href="{% static 'styles/sendboardstyles.css' %}">
+</head>
+<div class="dash-main">
+  <h2>Submit your work</h2>
+  <form method="post" enctype="multipart/form-data" class="panel">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn">Submit</button>
+  </form>
+
+  <div class="dash-main">
+  <h3>My Submissions</h3>
+  <ul>
+    {% for sub in submissions %}
+      <li>
+        <section>
+        <strong>{{ sub.title }}</strong> — {{ sub.submitted_on|date:"M d, Y H:i" }}
+        {% if sub.file %}
+          <a href="{{ sub.file.url }}">Download</a>
+        {% endif %}
+        <p>{{ sub.content }}</p>
+      </li>
+    {% empty %}
+      <li>No submissions yet.</li>
+      </section>
+    {% endfor %}
+  </ul>    
+</div>
+</div>
+{% endblock %}

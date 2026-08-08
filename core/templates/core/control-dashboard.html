@@ -1,0 +1,157 @@
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin dashboard — Bixtech</title>
+<link rel="stylesheet" href="{% static 'styles/dashboardstyles.css' %}">
+</head>
+<body>
+
+<div id="admin-shell" class="dash-shell">
+  <aside class="dash-side">
+    <a href="{% url 'home-page'%}" class="brand"><span class="mark"><span></span></span>Bixtech</a>
+    <nav class="dash-nav">
+      <a href="{% url 'profile-view' user.id %}" class="active"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg> Profile</a>
+      <a href="#applicants"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Applicants</a>
+      <a href="#workers"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Workers</a>
+      <a href="#news-admin"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11 13v5a2 2 0 0 0 4 0v-3"/></svg> Newsroom</a>
+      <a href="#reports"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg> Reports</a>
+    <a href="{% url 'admin-panel' user.id %}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>Admin control</a>
+    <a href="{% url 'add-superuser' user.id %}"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><!-- User icon --><circle cx="12" cy="7" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/><!-- Plus sign --><line x1="19" y1="8" x2="19" y2="14"/><line x1="16" y1="11" x2="22" y2="11"/></svg>Add Admin</a>
+      
+    </nav>
+    <div class="dash-side-foot">
+      <span class="avatar">    {% if profile.avatar %}
+      <img src="{{ profile.avatar.url }}" alt="Avatar" style="width:100px;height:100px;border-radius:50%;">
+    {% endif %}</span>
+      <div>
+        <strong>Admin — {{ user.username }}</strong>
+        <span>Studio lead</span>
+      </div>
+    </div>
+  </aside>
+
+<main class="dash-main">
+    <h1>Admin Dashboard</h1>
+
+    <!-- Users -->
+    <div class="panel" id="users">
+      <h3>Users (<span class="avatar">{{ users|length }}</span>)</h3>
+      <table>
+        <thead><tr><th>Name</th><th>Email</th><th>Expert ID</th></tr></thead>
+        <tbody>
+          {% for u in users %}
+          <tr><td>{{ u.name }}</td><td>{{ u.email }}</td><td>{{ u.expert_id }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Applicants -->
+    <div class="panel" id="applicants">
+      <h3>Applicants (<span class="avatar">{{ applicants|length }}</span>)</h3>
+      <table>
+        <thead><tr><th>Name</th><th>Email</th><th>Department</th><th>Interest</th></tr></thead>
+        <tbody>
+          {% for a in applicants %}
+          <tr><td>{{ a.name }}</td><td>{{ a.email }}</td><td>{{ a.department }}</td><td>{{ a.interest }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- we have the service here -->
+    <div class="panel" id="applicants">
+      <h3>Services Inquiries (<span class="avatar">{{ services|length }}</span>)</h3>
+      <table>
+        <thead><tr><th>Name</th><th>Gender</th><th>Email</th><th>Title</th><th>Phone</th><th>Request</th><th>Location</th></tr></thead>
+        <tbody>
+          {% for a in services %}
+          <tr><td>{{ a.name }}</td><td>{{ a.gender }}</td><td>{{ a.email }}</td><td>{{ a.title }}</td><td>{{ a.phone }}</td><td>{{ a.request }}</td><td>{{ a.location }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Interns -->
+    <div class="panel" id="interns">
+      <h3>Interns (<span class="avatar">{{ interns|length }}</span>)</h3>
+      <table>
+        <thead><tr><th>Name</th><th>Department</th><th>Start</th><th>End</th></tr></thead>
+        <tbody>
+          {% for i in interns %}
+          <tr><td>{{ i.user.name }}</td><td>{{ i.department }}</td><td>{{ i.start_date }}</td><td>{{ i.end_date }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Tasks -->
+    <div class="panel" id="tasks">
+      <h3>Tasks (<span class="avatar">{{ tasks|length }}</span>)</h3>
+      <table>
+        <thead><tr><th>Intern</th><th>Title</th><th>Status</th><th>Due</th></tr></thead>
+        <tbody>
+          {% for t in tasks %}
+          <tr><td>{{ t.intern.user.name }}</td><td>{{ t.title }}</td><td>{{ t.status }}</td><td>{{ t.due_date }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- News -->
+    <div class="panel" id="news">
+      <h3>News (<span class="avatar">{{ news|length }}</span>)</h3>
+      <ul>{% for n in news %}<li>{{ n.name }} — {{ n.Descriptions }}</li>{% endfor %}</ul>
+    </div>
+
+    <!-- Activities -->
+    <div class="panel" id="activities">
+      <h3>Activities (<span class="avatar">{{ activities|length }}</span>)</h3>
+      <ul>{% for act in activities %}<li>{{ act.type }} — {{ act.start_date }}</li>{% endfor %}</ul>
+    </div>
+
+    <!-- Bixenv -->
+    <div class="panel" id="bixenv">
+      <h3>Bixenv (<span class="avatar">{{ bixenv|length }}</span>)</h3>
+      <ul>{% for env in bixenv %}<li>{{ env.name }}</li>{% endfor %}</ul>
+    </div>
+
+
+    <!-- Submissions -->
+    <div class="panel" id="submissions">
+       <div class="dash-main">
+  <h3>All Submissionsn <span class="avatar">({{ submissions|length }})</span></h3>
+  <ul>
+    {% for sub in submissions %}
+      <li>
+        <section class="panel">
+        <strong>{{ sub.title }}</strong> — {{ sub.submitted_on|date:"M d, Y H:i" }}
+        {% if sub.file %}
+          <a href="{{ sub.file.url }}">Download</a>
+        {% endif %}
+        <p>{{ sub.content }}</p>
+      </li>
+    {% empty %}
+      <li>No submissions yet.</li>
+      </section>
+    {% endfor %}
+  </ul>    
+</div>
+    </div>
+
+    <!-- Announcements -->
+    <div class="panel" id="announcements">
+      <h3>Announcements (<span class="avatar">{{ announcements|length }}</span>)</h3>
+      <ul style="background-color: rgba(0, 0, 255, 0.186);">{% for ann in announcements %}<li><strong style="color: rgb(142, 7, 7);">{{ ann.title }}</strong> — {{ ann.body }}</li><hr><hr>{% endfor %}</ul>
+    <hr>
+    </div>
+  </main>
+</div>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'core/home.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile — Bixtech</title>
+  <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+</head>
+<body>
+   <div class="panel">
+    <h3>Profile Details</h3>
+    {% if profile.avatar %}
+      <img src="{{ profile.avatar.url }}" alt="Avatar" style="width:100px;height:100px;border-radius:50%;">
+    {% endif %}<br>
+    <p><strong>Email: </strong> {{ request.user.email }}</p>
+    <p><strong>Phone: </strong> {{ profile.phone }}</p>
+    <p><strong>Address: </strong> {{ profile.address }}</p>
+    <p><strong>Website: </strong><a href="{{ profile.website }}" class="truncate-link">{{ profile.website }}</a></p>
+    <p><strong>LinkedIn: </strong><a href="{{ profile.linkedin }}" class="truncate-link">{{ profile.linkedin }}</a></p>
+    <p><strong>GitHub: </strong><a href="{{ profile.github }}" class="truncate-link">{{ profile.github }}</a></p>
+  </div>
+<div class="dash-main">
+  <h2>My Profile</h2>
+  <form method="post" enctype="multipart/form-data" class="panel">
+    <br><br>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn">Update Profile</button>
+  </form>
+</div>
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,146 @@
+/* Reset only for profile page */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background:#4b025dba;
+  color: #333;
+}
+
+/* Main wrapper */
+.dash-main {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* Headings */
+.dash-main h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #040063;
+}
+
+/* Panels */
+.panel {
+  background: #a308caba;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 20px;
+  display: flex;
+  border: 8px solid rgba(20, 1, 1, 0.388);
+  flex-direction: column;
+  max-width: 119.5%;
+  margin: 5px auto;
+  padding: 20px;
+}
+.panel p, .panel strong {
+  
+max-width: 800px;
+margin: auto;
+margin-top: -50px;
+margin-bottom: -50px;
+padding: 20px;
+}
+.panel img{
+max-width: 800px;
+margin: auto;
+margin-top: 5px;
+margin-bottom: 5px;
+padding: 20px;
+}
+.panel h3 {
+max-width: 80%;
+margin: auto;
+margin-top: 1px;
+margin-bottom: 1px;
+padding: 20px;
+
+}
+
+/* Form styling */
+form.panel input,
+form.panel textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95em;
+}
+
+form.panel button {
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+form.panel button:hover {
+  background: #1d4ed8;
+}
+
+/* Profile details */
+.panel h3 {
+  margin-bottom: 15px;
+  color: #111827;
+}
+
+.panel p {
+  margin-bottom: 10px;
+  font-size: 0.95em;
+}
+
+.panel strong {
+  color: #000000;
+}
+
+/* Avatar */
+.panel img {
+  display: block;
+  margin-bottom: 15px;
+  border: 3px solid #2563eb;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+/* Links */
+.panel a {
+  color: #19029a;
+  text-decoration: none;
+}
+.panel a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .dash-main {
+    margin: 20px auto;
+    padding: 15px;
+  }
+  .dash-main h2 {
+    font-size: 1.5em;
+  }
+  .panel {
+    padding: 15px;
+  }
+}
+.truncate-link {
+  display: inline-block;
+  max-width: 250px;   /* adjust width to fit your design */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.truncate-link:hover {
+  text-decoration: underline;
+}

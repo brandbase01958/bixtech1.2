@@ -1,0 +1,24 @@
+{% extends 'core/home.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="form-container">
+    <h2>Internship Registration Form</h2>
+
+    <form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit Application</button>
+</form>
+  </div>
+
+
+<script>
+    document.getElementById("internshipForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  alert("Your application has been submitted successfully!");
+  //AJAX to send data to your backend
+});
+
+  </script> 
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends 'core/home.html' %}
+{% load static %}
+
+{% block content %}
+<section class="news">
+  <h2>Latest News</h2>
+  <p>Stay updated with Bix Tech’s announcements, press releases, and industry insights.</p>
+  <hr>
+  <div class="gallery">
+    {% for new in newstop %}
+    <div>
+      <p id="news">Stay updated with Bix Tech’s announcements, press releases, and industry insights.</p>
+      <img src="{{ new.image.url }}" alt="Office space" />
+    </div>
+    {% endfor %}
+    <!--<img src="images\fouth.jpg" alt="Workspace"/>-->
+  </div>
+</section>
+
+<section id="activities">
+  <h2>Current Activities</h2>
+  <p>Explore our ongoing projects, community events, and collaborations.</p>
+</section>
+
+<section id="board">
+  <h2>Discussion Board</h2>
+  <p>Join conversations with peers and experts. Share ideas and feedback.</p>
+  <a href="#" class="btn" onclick="board">Go to Board</a>
+  <script>
+    function board() {
+      window.location.href = "Join us on facebok";
+    }
+  </script>
+</section>
+
+<section id="internship">
+  <h2>Internship Registration</h2>
+  <p>Apply for exciting internship opportunities with us.</p>
+  <a href="{% url 'service-page' %}" class="btn">Register</a>
+</section>
+
+<section id="learning">
+  <h2>Learning Registration</h2>
+  <p>Sign up for our training and learning programs to boost your skills.</p>
+  <a href="{% url 'service-page' %}" class="btn">Register</a>
+</section>
+
+<section id="environment">
+  <h2>Our Company Environment</h2>
+  <p>Take a look at our workspace, team, and culture.</p>
+  <div class="gallery">
+    {% for place in workplace %}
+    <div>
+      <p id="news">{{place.name}}</p>
+      <img src="{{ place.image.url }}" alt="Office space" />
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="services">
+  <h2>Our Services</h2>
+  <ul>
+      <li>Consulting & Advisory</li>
+      <li>Technology Solutions</li>
+      <li>Training & Development</li>
+      <li>Community Engagement</li>
+  </ul>
+</section>
+{% endblock %}

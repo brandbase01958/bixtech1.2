@@ -1,0 +1,94 @@
+/* Page container */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f4f8, #d9e4ec);
+  font-family: Arial, sans-serif;
+}
+
+/* Form card */
+#form-container {
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 400px;
+  text-align: center;
+}
+
+/* Heading */
+#form-container h2 {
+  margin-bottom: 20px;
+  color: #1607b5;
+}
+
+/* Form fields */
+#form-container form p {
+  margin: 15px 0;
+  text-align: left;
+}
+
+#form-container input, 
+#form-container select, 
+#form-container textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-top: 5px;
+}
+
+/* Submit button */
+.btn {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 15px;
+  width: 100%;
+  font-size: 16px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: #0056b3;
+}
+
+/* Messages */
+.messages {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.messages li {
+  background-color: #ff4d4d;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+/* Links section */
+.links {
+  margin-top: 20px;
+}
+
+.links a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.links a:hover {
+  text-decoration: underline;
+}
+
+.toggle, .back {
+  margin: 10px 0;
+  font-size: 14px;
+}

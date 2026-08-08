@@ -1,0 +1,20 @@
+{% extends "core/home.html" %}
+{% load static %}
+
+{% block content %}
+{% for applican in applicans %}
+<div class="container" style="color: #fff; background-color: black;">
+    <section>
+        <div>{{ applican.name }}</div>
+        <div>{{ applican.email }}</div>
+        <div>{{ applican.department }}</div>
+        <diV>{{ applican.interest }}</diV>
+        <div>{{ applican.duration }}</div>
+        <div>{{ applican.start_date }}</div>
+        <div>{{ applican.resume }}</div>
+        <p><a href="{{ applican.letter.url }}" target="_blank">Download Application Letter</a></p>
+        <img src="{{ applican.letter.url }}" width="600" height="400">
+    </section>
+</div>
+{% endfor %}
+{% endblock %}

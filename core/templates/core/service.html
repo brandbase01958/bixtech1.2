@@ -1,0 +1,23 @@
+{% extends 'core/home.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="form-container">
+    <h2>Contact Us for form IT services</h2>
+
+    <form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit Application</button>
+</form>
+  </div>
+
+
+<script>
+    document.getElementById("internshipForm").addEventListener("submit", function(event) {
+  event.preventDefault();
+  alert("Your request has been submitted successfully! we will reply via email: bixtech3@gmail.com");
+});
+
+  </script> 
+{% endblock %}

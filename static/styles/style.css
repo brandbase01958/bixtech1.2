@@ -1,0 +1,160 @@
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; 
+      padding: 0;
+      color: #ffff;
+      background-color: #0040809e;
+      width: 100%;
+    }
+    .container{
+      width: 87%;
+      margin: 7px auto;
+    }
+  
+    #news {
+      font-weight: bold;
+    }
+    header {
+      background: #004080;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    section {
+
+      padding: 2rem;
+      margin: 1rem auto;
+      max-width: 98%;
+      background: #030b35;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    section:hover{
+      background-color: rgb(81, 1, 45);
+      width: 99%;
+      transition: 0.3s;
+    }
+    .news h2 {
+      color: #004080;
+      margin-bottom: 1rem;
+      margin-right: 60%;
+      font-size: 50%;
+    }
+    .bars {
+       color: #000;
+    }
+    .bars nav {
+      background: #0066cc;
+      display: flex;
+      gap: 1rem; 
+      gap: 1rem;  
+      width: 98.5%;                
+      overflow-x: auto;         
+      padding: 1rem 0rem 1rem 13px;  
+      scroll-behavior: smooth; 
+    }
+    .bars nav a{
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      text-indent: 5%;
+    }
+    .bars nav a:hover{
+      color: red;
+      transition: 200ms;
+      font-size: larger;
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: #0066cc;
+      color: white;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #004080;
+    }
+    .gallery {
+  display: flex;  
+  gap: 1rem;                  
+  overflow-x: auto;           
+  padding-bottom: 1rem;       
+  scroll-behavior: smooth;    
+}
+.gallery div div{
+  border: 2px solid #040aa4;
+  object-fit: scale-down;
+  background-color: #b8800f26;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.gallery img {
+  border: 2px solid #040aa4;
+  flex: 0 0 auto;              
+  width: 250px;               
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.01);
+}
+
+    footer {
+      background: #004080;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+    .footer-social {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  padding: 20px;
+  background: #1f2937; /* dark footer background */
+}
+
+.footer-social .social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.2em;
+  transition: background 0.3s, transform 0.2s;
+}
+
+/* Brand colors */
+.footer-social .facebook { background: #1877f2; }
+.footer-social .youtube { background: #ff0000; }
+.footer-social .x { background: #000; }
+.footer-social .threads { background: #1da1f2; }
+
+/* Hover effect */
+.footer-social .social-icon:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .footer-social {
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-social .social-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+}

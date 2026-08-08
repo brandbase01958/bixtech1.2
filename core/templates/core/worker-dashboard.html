@@ -1,0 +1,134 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worker dashboard — Bixtech</title>
+  <link rel="stylesheet" href="{% static 'styles/dashboardstyles.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/admin_panel.css' %}">
+  
+</head>
+<body>
+<div class="dash-shell">
+  <aside class="dash-side">
+    <a href="{% url 'home-page' %}" class="brand">Home</a>
+    <nav class="dash-nav">
+      <a href="#" class="active">Overview</a>
+      <a href="#tasks">My tasks</a>
+      <a href="#messages">My messages</a>
+      <a href="{% url 'submissions-page'%}">submit task</a>
+      <a href="#announcements">Announcements</a>
+      <a href="{% url 'profile-view' user.id %}">Profile</a>
+    </nav>
+    <div class="dash-side-foot">
+      <span class="avatar">    {% if profile.avatar %}
+      <img src="{{ profile.avatar.url }}" alt="Avatar" style="width:100px;height:100px;border-radius:50%;">
+    {% endif %}</span>
+      <div>
+        <strong>{{ user.username }}</strong>
+        <span>Intern · {{ intern.department }}</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="dash-main">
+    <!-- KPI Cards -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <span class="label">Tasks this week</span>
+        <strong>{{ task_count }}</strong>
+      </div>
+      <div class="kpi-card">
+        <span class="label">Completed</span>
+        <strong>{{ completed_count }}</strong>
+      </div>
+      <div class="kpi-card">
+        <span id="label-x" class="label">Hours logged</span>
+        <strong>{{ intern.department }} · {{ intern.start_date }}</strong>
+      </div>
+      <div class="kpi-card">
+        <span class="label">Review score</span>
+        <strong>88<span style="font-size:16px;color:var(--muted-soft);">/100</span></strong>
+      </div>
+    </div>
+
+    <!-- Tasks -->
+    <div class="panel" id="tasks">
+      <div class="panel-head">
+        <h3>My tasks</h3>
+        <div class="sub" id="task-progress-label"
+             data-completed="{{ completed_count }}"
+             data-total="{{ task_count }}">
+          {{ completed_count }} of {{ task_count }} tasks complete
+        </div>
+        <div class="progress-bar">
+          <i id="task-progress-bar"></i>
+        </div>
+      </div>
+      <div class="task-list">
+        {% for task in tasks %}
+          <label class="task-item">
+            <input type="checkbox" {% if task.status == "complete" %}checked{% endif %} contenteditable=0>
+            <div>
+              <div class="t-title">{{ task.title }}</div>
+              <hr>
+              <div class="t-title">{{ task.description }}</div>
+              <div class="t-meta">Due {{ task.due_date }} · {{ task.status|title }}</div>
+            </div>
+          </label>
+        {% empty %}
+          <p>No tasks assigned yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- messages -->
+    <section id="messages" class="panel">
+  <h3>Messages</h3>
+  <form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="action" value="send_message">
+    {{ message_form.as_p }}
+    <button class="btn">Send</button>
+  </form>
+
+  <h4>Recent Messages</h4>
+  <ul>
+    {% for msg in messages %}
+      <li class="panel" id="intruction">
+        <strong>{{ msg.sender.username }}</strong> → 
+        <strong>{{ msg.receiver.username }}</strong>: 
+        {{ msg.body }}
+      </li>
+    {% empty %}
+      <li>No messages yet.</li>
+    {% endfor %}
+  </ul>
+</section>
+
+
+    <!-- Announcements -->
+    <div class="panel" id="announcements">
+      <h3>Announcements</h3>
+      <div class="timeline">
+        {% for ann in announcements %}
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-body">
+              <strong>{{ ann.title }}</strong>
+              <span>Posted {{ ann.posted_on }} · {{ ann.author }}</span>
+              <p>{{ ann.body }}</p>
+            </div>
+          </div>
+        {% empty %}
+          <p>No announcements yet.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+</div>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
+{% endblock %}
