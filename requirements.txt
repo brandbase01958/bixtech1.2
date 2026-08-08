@@ -7,3 +7,4 @@ django-crispy-forms
 django-widget-tweaks
 django-bootstrap5
 django-environ
+django-extensions
