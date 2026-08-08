@@ -9,7 +9,7 @@
   <div class="gallery">
     {% for new in newstop %}
     <div>
-      <p id="news">Stay updated with Bix Tech’s announcements, press releases, and industry insights.</p>
+      <p id="news">{{new.description}}</p>
       <img src="{{ new.image.url }}" alt="Office space" />
     </div>
     {% endfor %}
