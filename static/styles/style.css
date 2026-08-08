@@ -31,7 +31,6 @@
     }
     section:hover{
       background-color: rgb(81, 1, 45);
-      width: 99%;
       transition: 0.3s;
     }
     .news h2 {
