@@ -1,0 +1,9 @@
+django==6.0.7
+whitenoise
+gunicorn
+psycopg2-binary
+pillow
+django-crispy-forms
+django-widget-tweaks
+django-bootstrap5
+django-environ
